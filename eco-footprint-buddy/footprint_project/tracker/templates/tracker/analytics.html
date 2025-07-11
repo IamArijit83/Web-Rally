@@ -1,0 +1,27 @@
+{% load static %}
+  <link rel="stylesheet" href="{% static 'tracker/css/transitions.css' %}">
+  <script src="{% static 'tracker/js/transitions.js' %}" defer></script>
+  
+
+<h2>Carbon Score Trend</h2>
+<canvas id="chart"></canvas>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+
+  const labels = {{ dates|safe }};
+  const data = {{ scores|safe }};
+
+  new Chart(document.getElementById('chart'), {
+    type: 'line',
+    data: {
+      labels: labels,
+      datasets: [{
+        label: 'Carbon Score',
+        data: data,
+        borderColor: 'green',
+        tension: 0.4
+      }]
+    }
+  });
+</script>

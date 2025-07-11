@@ -1,0 +1,130 @@
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background-color: #f0f8ff;
+    color: #333;
+    text-align: center;
+    padding: 50px;
+}
+
+h1 {
+    color: #2b6777;
+    font-size: 40px;
+}
+
+h2 {
+    color: #52ab98;
+}
+
+p {
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+form {
+    background-color: #fff;
+    display: inline-block;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    text-align: left;
+    margin-top: 30px;
+}
+
+label {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+select, input[type="number"] {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    margin-bottom: 15px;
+}
+
+button {
+    background-color: #2b6777;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #52ab98;
+}
+
+.result {
+    background-color: #d4edda;
+    border: 1px solid #c3e6cb;
+    color: #155724;
+    display: inline-block;
+    padding: 15px;
+    margin-top: 30px;
+    border-radius: 8px;
+}
+
+/* Gradient background for landing page */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  background: linear-gradient(to bottom, #0f2027, #203a43, #000000); /* dark blue to black */
+  color: white;
+  scroll-behavior: smooth;
+}
+
+/* Optional: Full height sections for visual scrolling effect */
+section {
+  min-height: 100vh;
+  padding: 50px;
+  box-sizing: border-box;
+}
+
+/* Make sure about and contact sections are styled properly */
+#about, #contact {
+  scroll-margin-top: 60px; /* adjust if you have a fixed navbar */
+}
+
+
+/* === GENERAL PAGE STYLING === */
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(to bottom, #0f2027, #203a43, #000000);
+  color: white;
+  margin: 0;
+  padding: 0;
+}
+
+/* === NAVIGATION LINKS AT TOP === */
+nav a {
+  color: #00d9ff;
+  text-decoration: none;
+  margin: 0 15px;
+  font-weight: bold;
+}
+
+nav a:hover {
+  color: #76eaff;
+  text-decoration: underline;
+}
+
+/* === FORM INPUT FIELD STYLING === */
+input, select, textarea {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 10px;
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+input::placeholder, textarea::placeholder {
+  color: #ccc;
+}

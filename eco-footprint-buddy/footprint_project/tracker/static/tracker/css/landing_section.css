@@ -1,0 +1,31 @@
+section {
+  padding: 100px 20px;
+  text-align: center;
+  color: white;
+  font-family: 'Arial', sans-serif;
+  scroll-margin-top: 100px;
+}
+
+#about {
+  background-color: #1b263b;
+}
+
+#contact {
+  background-color: #415a77;
+}
+
+section h2 {
+  font-size: 36px;
+  margin-bottom: 20px;
+  color: #ffffff;
+}
+
+section p {
+  font-size: 18px;
+  max-width: 700px;
+  margin: auto;
+}
+
+html {
+  scroll-behavior: smooth;
+}

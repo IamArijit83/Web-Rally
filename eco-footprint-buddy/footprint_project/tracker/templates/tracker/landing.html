@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Eco Footprint Buddy - Landing</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'tracker/css/landing_sections.css' %}">
+    <style>
+        body {
+            margin: 0;
+            background-color: #0d1b2a;
+            font-family: Arial, sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        #globeContainer {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+        }
+
+        h1 {
+            position: absolute;
+            top: 30px;
+            width: 100%;
+            text-align: center;
+            color: #e0e1dd;
+            font-size: 36px;
+            z-index: 1;
+        }
+
+        .nav-links {
+            position: absolute;
+            top: 80px;
+            width: 100%;
+            text-align: center;
+            z-index: 1;
+        }
+
+        .nav-links a {
+            color: #00b4d8;
+            text-decoration: none;
+            margin: 0 20px;
+            font-size: 18px;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #90e0ef;
+        }
+
+        /* Scroll sections */
+        section {
+            padding: 100px 20px;
+            text-align: center;
+            color: white;
+        }
+
+        #about {
+            background-color: #1b263b;
+        }
+
+        #contact {
+            background-color: #415a77;
+        }
+
+        section h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        section p {
+            font-size: 18px;
+            max-width: 700px;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Title -->
+    <h1>Eco Footprint Buddy 🌍</h1>
+
+
+
+    <!-- Globe Container -->
+    <div id="globeContainer"></div>
+
+    <!-- Scrollable Sections -->
+    <section id="about">
+        <h2>About Eco Footprint Buddy</h2>
+        <p>
+            Eco Footprint Buddy helps you track your daily carbon emissions
+            and gives you tips to reduce your footprint. You answer simple
+            questions, and it calculates your carbon score.<br>
+            This is a full fledged Python Full Stack Project created
+            by Arijit Patra, Dibyaranjan Prusty, Daikho Athishu
+            and T.Lalremsangi.<br>
+            And Special thanks to LPU for their support and 
+            special thanks to Sir, under his teaching and guidance we were 
+            able to create this project.
+        </p>
+    </section>
+
+    <section id="contact">
+        <h2>Contact Us</h2>
+        <p>
+            Want to share feedback or have questions? Reach out to us at
+            <a href="mailto:support@ecobuddy.com" style="color: #ffe66d;">support@ecobuddy.com</a>
+        </p>
+    </section>
+
+    <!-- Static Assets -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="{% static 'tracker/js/landing.js' %}"></script>
+    <script src="{% static 'tracker/js/transitions.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Eco Footprint Buddy</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'tracker/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <style>
+        /* Make nav links visible on dark background */
+        nav a {
+            color: #00d9ff;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            color: #76eaff;
+            text-decoration: underline;
+        }
+
+        /* Make form label text black so it's visible on white form background */
+        label {
+            color: black;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input, select {
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  width: 100%;
+  margin-top: 5px;
+  color: black;               /* ✅ Fix: make text inside dropdown black */
+  background-color: white;    /* ✅ Fix: ensure visible background */
+}
+
+
+        button {
+            padding: 10px 16px;
+            background-color: #2d6cdf;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #1e4cad;
+        }
+    </style>
+</head>
+
+<body>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'tracker/css/transitions.css' %}">
+    <script src="{% static 'tracker/js/transitions.js' %}" defer></script>
+
+    <!-- Nav links styled -->
+    <nav>
+        <a href="{% url 'history' %}">View History</a>
+        <a href="{% url 'analytics' %}">Analytics</a>
+        <a href="{% url 'feedback' %}">Send Feedback</a>
+    </nav>
+
+    <h1>🎉 Welcome, {{ user.username }}! 🎉</h1>
+    <p>Your personal carbon footprint tracker.</p>
+
+    <h2>Log Your Activity</h2>
+    <form method="POST">
+        {% csrf_token %}
+
+        <!-- Transport Method Dropdown -->
+        <label for="transport">Transport Method:</label>
+        <select id="transport" name="transport" required>
+            <option value="">--Select--</option>
+            <option value="car">Car</option>
+            <option value="bus">Bus</option>
+            <option value="bike">Bike</option>
+            <option value="walk">Walk</option>
+            <option value="cab">Cab</option>
+            <option value="auto">Auto</option>
+            <option value="erickshaw">E-rickshaw</option>
+            <option value="rickshaw">Rickshaw</option>
+            <option value="bicycle">Bicycle</option>
+            <option value="electric_vehicle">Electric Vehicle</option>
+        </select>
+        <br><br>
+
+        <!-- Meal Type Dropdown -->
+        <label for="meal">Meal Type:</label>
+        <select id="meal" name="meal" required onchange="handleMealChange()">
+            <option value="">--Select--</option>
+            <option value="meat">Meat</option>
+            <option value="vegetarian">Vegetarian</option>
+            <option value="vegan">Vegan</option>
+        </select>
+        <br><br>
+
+        <!-- Meat Consumption Input -->
+        <label for="meat_amount">Meat Amount (grams/day):</label>
+        <input type="number" id="meat_amount" name="meat_amount" min="0">
+        <br><br>
+
+        <!-- Energy Usage Input -->
+        <label for="energy">Energy Use (hours/day of AC/Heater):</label>
+        <input type="number" id="energy" name="energy" min="0" required>
+        <br><br>
+
+        <button type="submit">Submit</button>
+    </form>
+
+    {% if carbon_score is not None %}
+        <div class="result">
+            <h2>Your Estimated Carbon Footprint Score:</h2>
+            <p style="font-size: 24px;">{{ carbon_score }}</p>
+            <p>
+                {% if carbon_score < 50 %}
+                    Great job! Your footprint is low. 🌱
+                {% elif carbon_score < 100 %}
+                    Moderate footprint. Consider some green swaps! ♻️
+                {% else %}
+                    High footprint. Try to reduce it. 🌍
+                {% endif %}
+            </p>
+        </div>
+    {% endif %}
+
+    {% if suggestions %}
+        <div class="result" style="background-color: #fff3cd; color: #856404; border: 1px solid #ffeeba;">
+            <h3>Green Swap Suggestions:</h3>
+            <ul style="text-align: left;">
+                {% for suggestion in suggestions %}
+                    <li>{{ suggestion }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+
+    <!-- Logout Button -->
+    <div style="position: absolute; top: 20px; right: 20px;">
+        <form action="{% url 'logout' %}" method="POST">
+            {% csrf_token %}
+            <button style="padding: 8px 16px; background: #1b263b; color: #fff; border: none; border-radius: 6px; cursor: pointer;">
+                Logout
+            </button>
+        </form>
+    </div>
+
+    <script>
+        function handleMealChange() {
+            const meal = document.getElementById("meal").value;
+            const meatAmount = document.getElementById("meat_amount");
+            if (meal === "vegetarian" || meal === "vegan") {
+                meatAmount.value = "";
+                meatAmount.disabled = true;
+            } else {
+                meatAmount.disabled = false;
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            handleMealChange();
+        });
+    </script>
+
+    <script src="{% static 'tracker/js/script.js' %}"></script>
+
+</body>
+</html>

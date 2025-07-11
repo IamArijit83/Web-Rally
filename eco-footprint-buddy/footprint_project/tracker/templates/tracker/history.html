@@ -1,0 +1,12 @@
+{% load static %}
+  <link rel="stylesheet" href="{% static 'tracker/css/transitions.css' %}">
+  <script src="{% static 'tracker/js/transitions.js' %}" defer></script>
+
+<h2>Your Carbon Score History</h2>
+<ul>
+  {% for item in activities %}
+    <li>{{ item.submitted_at }} → Score: {{ item.carbon_score }}</li>
+  {% empty %}
+    <li>No activity yet.</li>
+  {% endfor %}
+</ul>
