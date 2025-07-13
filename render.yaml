@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: eco-footprint-buddy
+    env: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn footprint_project.wsgi:application
+    envVars:
+      - key: DJANGO_SETTINGS_MODULE
+        value: footprint_project.settings
+      - key: PYTHON_VERSION
+        value: 3.11

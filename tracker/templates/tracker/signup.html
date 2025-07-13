@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Signup - Eco Footprint Buddy</title>
+    {% load static %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'tracker/css/transitions.css' %}">
+    <script src="{% static 'tracker/js/transitions.js' %}" defer></script>
+
+    <style>
+        body {
+            background-color: #0d1b2a;
+            color: #e0e1dd;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        h2 {
+            margin-bottom: 20px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            width: 260px;
+            animation: fadeIn 0.5s ease;
+        }
+        input, button {
+            padding: 10px;
+            border: none;
+            border-radius: 6px;
+        }
+        button {
+            background-color: #1b263b;
+            color: #fff;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #415a77;
+        }
+        .message {
+            background: #415a77;
+            padding: 10px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            text-align: center;
+            color: #fff;
+            width: 260px;
+        }
+        a {
+            color: #4da8da;
+            margin-top: 10px;
+            text-decoration: none;
+        }
+        .password-container {
+            position: relative;
+        }
+        #togglePassword {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            cursor: pointer;
+            color: #e0e1dd;
+        }
+        #strengthBar {
+            height: 6px;
+            background: #415a77;
+            margin-top: 5px;
+            border-radius: 4px;
+            width: 100%;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="message">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+
+    <h2>Create Account</h2>
+    
+    <form method="POST">
+        {% csrf_token %}
+        <input type="text" name="username" placeholder="Username" required>
+
+        <div class="password-container">
+            <input type="password" name="password" id="passwordInput" placeholder="Password (min 6 characters)" minlength="6" required>
+            <span id="togglePassword">👁️</span>
+        </div>
+
+        <div id="strengthBar"></div>
+
+        <button type="submit">Sign Up</button>
+    </form>
+
+    <a href="{% url 'login' %}">Already have an account? Login</a>
+
+    <script>
+        const passwordInput = document.getElementById('passwordInput');
+        const togglePassword = document.getElementById('togglePassword');
+        const strengthBar = document.getElementById('strengthBar');
+
+        togglePassword.addEventListener('click', () => {
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+        });
+
+        passwordInput.addEventListener('input', () => {
+            const val = passwordInput.value;
+            let strength = 0;
+
+            if (val.length > 5) strength += 1;
+            if (/[A-Z]/.test(val)) strength += 1;
+            if (/[0-9]/.test(val)) strength += 1;
+            if (/[^A-Za-z0-9]/.test(val)) strength += 1;
+
+            if (strength <= 1) {
+                strengthBar.style.background = '#ff4d4d';
+                strengthBar.style.width = '25%';
+            } else if (strength === 2) {
+                strengthBar.style.background = '#ffa500';
+                strengthBar.style.width = '50%';
+            } else if (strength === 3) {
+                strengthBar.style.background = '#4da8da';
+                strengthBar.style.width = '75%';
+            } else {
+                strengthBar.style.background = '#4caf50';
+                strengthBar.style.width = '100%';
+            }
+        });
+    </script>
+
+</body>
+</html>

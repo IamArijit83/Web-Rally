@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Carbon Details</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'tracker/css/style.css' %}">
+</head>
+
+<body>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'tracker/css/transitions.css' %}">
+    <script src="{% static 'tracker/js/transitions.js' %}" defer></script>
+
+    <h1>User Details Summary</h1>
+
+    <h2>Hello, {{ username }} 👋</h2>
+
+    <p><strong>Transport Method:</strong> {{ transport }}</p>
+    <p><strong>Meal Type:</strong> {{ meal }}</p>
+
+    {% if meat_amount %}
+        <p><strong>Meat Amount:</strong> {{ meat_amount }} grams/day</p>
+    {% endif %}
+
+    <p><strong>AC/Heater Usage:</strong> {{ energy }} hours/day</p>
+
+    <h3>Your Estimated Carbon Score:</h3>
+    <p style="font-size: 24px;">{{ carbon_score }}</p>
+
+    <h3>Green Swap Suggestions:</h3>
+    {% if suggestions %}
+        <ul>
+            {% for suggestion in suggestions %}
+                <li>{{ suggestion }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No suggestions available.</p>
+    {% endif %}
+
+    <a href="{% url 'home' %}" style="text-decoration: none; color: blue;">🔙 Back to Home</a>
+</body>
+</html>

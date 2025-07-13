@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Login - Eco Footprint Buddy</title>
+    {% load static %}
+    <style>
+        body {
+            background-color: #0d1b2a;
+            color: #e0e1dd;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        h2 {
+            margin-bottom: 20px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            width: 260px;
+            animation: fadeIn 0.5s ease;
+        }
+        input, button {
+            padding: 10px;
+            border: none;
+            border-radius: 6px;
+        }
+        button {
+            background-color: #1b263b;
+            color: #fff;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #415a77;
+        }
+        .message {
+            background: #415a77;
+            padding: 10px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            text-align: center;
+            color: #fff;
+            width: 260px;
+        }
+        a {
+            color: #4da8da;
+            margin-top: 10px;
+            text-decoration: none;
+        }
+        .password-container {
+            position: relative;
+        }
+        #togglePassword {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            cursor: pointer;
+            color: #e0e1dd;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'tracker/css/transitions.css' %}">
+    <script src="{% static 'tracker/js/transitions.js' %}" defer></script>
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="message">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+
+    <h2>Welcome Back</h2>
+    
+    <form method="POST">
+        {% csrf_token %}
+        <input type="text" name="username" placeholder="Username" required>
+
+        <div class="password-container">
+            <input type="password" name="password" id="passwordInput" placeholder="Password" required>
+            <span id="togglePassword">👁️</span>
+        </div>
+
+        <button type="submit">Login</button>
+    </form>
+
+    <a href="{% url 'password_reset' %}">Forgot Password?</a>
+
+
+    <a href="{% url 'signup' %}">Don't have an account? Sign Up</a>
+
+    <script>
+        const passwordInput = document.getElementById('passwordInput');
+        const togglePassword = document.getElementById('togglePassword');
+
+        togglePassword.addEventListener('click', () => {
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+        });
+    </script>
+
+</body>
+</html>
